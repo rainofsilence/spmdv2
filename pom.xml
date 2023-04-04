@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.10</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>cn.silence</groupId>
+    <artifactId>spmdv2</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+    <name>spmdv2</name>
+    <description>spmdv2</description>
+    <modules>
+        <module>spmdv2-dao</module>
+        <module>spmdv2-service</module>
+        <module>spmdv2-web</module>
+        <module>spmdv2-common</module>
+    </modules>
+    <properties>
+        <java.version>1.8</java.version>
+        <revision>1.0.0-SNAPSHOT</revision>
+    </properties>
+    <!-- 全局通用依赖 -->
+    <dependencies>
+        <!-- springboot-starter -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <!-- springboot web(MVC) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- springboot -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!--lombok插件 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <!--热部署工具dev-tools-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
+    <!-- 依赖版本统一管理 -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cn.silence</groupId>
+                <artifactId>spmdv2-common</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.silence</groupId>
+                <artifactId>spmdv2-dao</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.silence</groupId>
+                <artifactId>spmdv2-service</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.silence</groupId>
+                <artifactId>spmdv2-web</artifactId>
+                <version>${revision}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!--构建工具-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <finalName>${project.artifactId}</finalName>
+                    <outputDirectory>../package</outputDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
