@@ -23,6 +23,12 @@
     <properties>
         <java.version>1.8</java.version>
         <revision>1.0.0-SNAPSHOT</revision>
+        <mybatis-plus.version>3.4.0</mybatis-plus.version>
+        <velocity.version>2.3</velocity.version>
+        <mysql.version>8.0.32</mysql.version>
+        <springboot.version>2.7.10</springboot.version>
+        <common.beanutils.version>1.8.0</common.beanutils.version>
+        <commons.collections.version>3.2.2</commons.collections.version>
     </properties>
     <!-- 全局通用依赖 -->
     <dependencies>
@@ -77,6 +83,48 @@
                 <groupId>cn.silence</groupId>
                 <artifactId>spmdv2-web</artifactId>
                 <version>${revision}</version>
+            </dependency>
+
+            <!--添加MyBatis-Plus依赖 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <!-- 添加代码生成器依赖 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <!-- 模板引擎 -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>${velocity.version}</version>
+            </dependency>
+            <!--Thymeleaf模板依赖-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-thymeleaf</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+            <!--添加MySQL驱动依赖 -->
+            <dependency>
+                <groupId>com.mysql</groupId>
+                <artifactId>mysql-connector-j</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <!-- CopyUtil需要用到 -->
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${common.beanutils.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>${commons.collections.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
