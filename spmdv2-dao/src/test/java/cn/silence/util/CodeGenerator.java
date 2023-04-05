@@ -60,7 +60,7 @@ public class CodeGenerator {
 
     public static void main(String[] args) {
 		//注意，表名有些是区分大小写的
-		String[] tables = {"user_info","code_catalog"};
+		String[] tables = {"user_info"};
 		for (String table : tables) {
 			generateByTables(table);
 		}
@@ -127,7 +127,7 @@ public class CodeGenerator {
 
         templateConfig.setEntity("templates/entity.java.vm") // entity模板采用自定义模板
                 .setMapper("templates/mapper.java.vm")// mapper模板采用自定义模板
-                .setXml(null) // 不生成xml文件
+                .setXml("templates/mapper.xml.vm") // xml采用自定义模板
                 .setService("templates/service.java.vm") // service模板采用自定义模板
                 .setServiceImpl("templates/serviceImpl.java.vm") // serviceImpl模板采用自定义模板
                 .setController("templates/controller.java.vm"); // controller模板采用自定义模板
@@ -188,7 +188,7 @@ public class CodeGenerator {
                 .setBaseResultMap(true)
                 .setBaseColumnList(true)
                 .setActiveRecord(false)
-                .setAuthor("huanzi-qch")
+                .setAuthor("rainofsilence")
                 .setServiceName("%sService");
         return globalConfig;
     }

@@ -21,10 +21,10 @@ public interface CommonMapper<T> extends BaseMapper<T> {
     int executeNativeSqlOfUpdate(String sql);
 
     @Select(value = "${sql}")
-    Map<String,Object> executeNativeSqlOfOne(String sql);
+    Map<String, Object> executeNativeSqlOfOne(String sql);
 
     @Select(value = "${sql}")
-    List<Map<String,Object>> executeNativeSqlOfList(String sql);
+    List<Map<String, Object>> executeNativeSqlOfList(String sql);
 
     @Select(value = "${sql}")
     T executeNativeSqlFindOne(String sql);

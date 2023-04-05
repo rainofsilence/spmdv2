@@ -8,10 +8,11 @@ import java.util.List;
 
 /**
  * 通用service接口
+ *
  * @param <V> vo对象
  * @param <T> entity实体
  */
-public interface CommonService<V,T> {
+public interface CommonService<V, T> {
 
     /**
      * page接口 分页、排序

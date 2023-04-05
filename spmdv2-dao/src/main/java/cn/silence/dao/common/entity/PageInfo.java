@@ -1,6 +1,6 @@
 package cn.silence.dao.common.entity;
 
-import cn.silence.dao.util.CopyUtil;
+import cn.silence.dao.toolkit.CopyUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.Data;
 

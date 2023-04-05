@@ -4,15 +4,15 @@ import cn.silence.dao.common.entity.PageCondition;
 import cn.silence.dao.common.entity.PageInfo;
 import cn.silence.dao.common.entity.Result;
 import cn.silence.dao.common.mapper.CommonMapper;
-import cn.silence.dao.util.CopyUtil;
+import cn.silence.dao.toolkit.CopyUtil;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
@@ -22,17 +22,18 @@ import java.util.List;
 
 /**
  * 通用service实现类
+ *
  * @param <V> vo对象
  * @param <T> entity实体
  */
-public class CommonServiceImpl<V,T> implements CommonService<V,T> {
+public class CommonServiceImpl<V, T> implements CommonService<V, T> {
 
-    @Autowired
+    @Resource
     private CommonMapper<T> commonMapper;
 
-    private final Class<V> entityVoClass;//实体类Vo
+    private final Class<V> entityVoClass;// 实体类Vo
 
-    private final Class<T> entityClass;//实体类
+    private final Class<T> entityClass;// 实体类
 
     public CommonServiceImpl() {
         Type[] types = ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments();
@@ -42,7 +43,7 @@ public class CommonServiceImpl<V,T> implements CommonService<V,T> {
 
     @Override
     public Result<PageInfo<V>> page(V entityVo) {
-        //实体类缺失分页信息
+        // 实体类缺失分页信息
         if (!(entityVo instanceof PageCondition)) {
             throw new RuntimeException("实体类" + entityVoClass.getName() + "未继承PageCondition");
         }
@@ -50,24 +51,24 @@ public class CommonServiceImpl<V,T> implements CommonService<V,T> {
 
         T entity = CopyUtil.copy(entityVo, entityClass);
 
-        //查询条件
+        // 查询条件
         QueryWrapper<T> queryWrapper = new QueryWrapper<>();
         queryWrapper.setEntity(entity);
 
-        //排序
-        if(!StringUtils.isEmpty(pageCondition.getSord()) && "desc".equalsIgnoreCase(pageCondition.getSord())){
+        // 排序
+        if (!StringUtils.isEmpty(pageCondition.getSord()) && "desc".equalsIgnoreCase(pageCondition.getSord())) {
             queryWrapper.orderByDesc(pageCondition.getSidx());
-        }else{
+        } else {
             queryWrapper.orderByAsc(pageCondition.getSidx());
         }
 
-        //分页
+        // 分页
         IPage<T> page = new Page<>(pageCondition.getPage(), pageCondition.getRows());
 
-        //查询获取数据
+        // 查询获取数据
         page = commonMapper.selectPage(page, queryWrapper);
 
-        //拼接数据
+        // 拼接数据
         PageInfo<V> pageInfo = PageInfo.of(page, entityVoClass);
         pageInfo.setSidx(pageCondition.getSidx());
         pageInfo.setSord(pageCondition.getSord());
@@ -79,46 +80,46 @@ public class CommonServiceImpl<V,T> implements CommonService<V,T> {
         T entity = CopyUtil.copy(entityVo, entityClass);
         QueryWrapper<T> queryWrapper = new QueryWrapper<>();
         queryWrapper.setEntity(entity);
-        return Result.build(CopyUtil.copyList(commonMapper.selectList(queryWrapper),entityVoClass));
+        return Result.build(CopyUtil.copyList(commonMapper.selectList(queryWrapper), entityVoClass));
     }
 
     @Override
     public Result<V> get(String id) {
-        return Result.build(CopyUtil.copy(commonMapper.selectById(id),entityVoClass));
+        return Result.build(CopyUtil.copy(commonMapper.selectById(id), entityVoClass));
     }
 
     @Override
     public Result<V> save(V entityVo) {
-        //传进来的对象（属性可能残缺）
+        // 传进来的对象（属性可能残缺）
         T entity = CopyUtil.copy(entityVo, entityClass);
 
-        //最终要保存的对象
+        // 最终要保存的对象
         T entityFull = entity;
 
         Object id = null;
 
-        //为空的属性值，忽略属性，BeanUtils复制的时候用到
+        // 为空的属性值，忽略属性，BeanUtils复制的时候用到
         List<String> ignoreProperties = new ArrayList<>();
 
-        //获取最新数据，解决部分更新时jpa其他字段设置null问题
+        // 获取最新数据，解决部分更新时jpa其他字段设置null问题
         try {
-            //反射获取Class的属性（Field表示类中的成员变量）
+            // 反射获取Class的属性（Field表示类中的成员变量）
             for (Field field : entity.getClass().getDeclaredFields()) {
-                //获取授权
+                // 获取授权
                 field.setAccessible(true);
-                //属性名称
+                // 属性名称
                 String fieldName = field.getName();
-                //属性的值
+                // 属性的值
                 Object fieldValue = field.get(entity);
 
-                //找出Id主键
+                // 找出Id主键
                 if (field.isAnnotationPresent(TableId.class) && !StringUtils.isEmpty(fieldValue)) {
                     id = fieldValue;
                     entityFull = commonMapper.selectById((Serializable) id);
                 }
 
-                //找出值为空的属性，值为空则为忽略属性
-                if(null == fieldValue){
+                // 找出值为空的属性，值为空则为忽略属性
+                if (null == fieldValue) {
                     ignoreProperties.add(fieldName);
                 }
             }
@@ -132,20 +133,20 @@ public class CommonServiceImpl<V,T> implements CommonService<V,T> {
             e.printStackTrace();
         }
 
-        //新增或更新
-        if(StringUtils.isEmpty(id)){
-            //1插入成功、0失败
+        // 新增或更新
+        if (StringUtils.isEmpty(id)) {
+            // 1插入成功、0失败
             commonMapper.insert(entityFull);
-        }else{
+        } else {
             commonMapper.updateById(entityFull);
         }
 
-        return Result.build(CopyUtil.copy(entityFull,entityVoClass));
+        return Result.build(CopyUtil.copy(entityFull, entityVoClass));
     }
 
     @Override
     public Result<String> delete(String id) {
-        //1删除成功、0失败
+        // 1删除成功、0失败
         return Result.build(String.valueOf(commonMapper.deleteById(id)));
     }
 }
