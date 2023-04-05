@@ -26,5 +26,8 @@
     <sql id="Base_Column_List">
         id, username, password, nickname, gender, real_name, id_type, id_card, phone, email, last_login_ip, last_login_time, create_time, update_time, delete_time, deleted
     </sql>
+    <select id="listAllTest" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from user_info order by create_time desc
+    </select>
 
 </mapper>

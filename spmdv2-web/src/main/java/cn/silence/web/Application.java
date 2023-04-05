@@ -13,8 +13,8 @@ import org.springframework.context.annotation.ComponentScan;
  * @desc
  */
 @SpringBootApplication
+@ComponentScan({"cn.silence.**"})
 @MapperScan(basePackages = "cn.silence.dao.mapper")
-@ComponentScan({"cn.silence"})
 public class Application {
 
     public static void main(String[] args) {

@@ -1,5 +1,6 @@
 package cn.silence.dao.entity;
 
+import cn.silence.dao.handler.EncryptHandler;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
@@ -19,7 +20,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName("user_info")
+@TableName(value = "user_info", autoResultMap = true)
 public class UserInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -72,7 +73,7 @@ public class UserInfo implements Serializable {
     /**
      * 手机号
      */
-    @TableField("phone")
+    @TableField(value = "phone",typeHandler = EncryptHandler.class)
     private String phone;
 
     /**
