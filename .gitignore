@@ -33,3 +33,4 @@ build/
 .vscode/
 
 log/
+spmdv2-dao/src/test/resources/cn/silence
