@@ -1,4 +1,4 @@
-package cn.silence.dao.pojo.in;
+package cn.silence.service.pojo.in;
 
 import lombok.Data;
 

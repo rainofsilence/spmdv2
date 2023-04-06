@@ -1,10 +1,10 @@
-package cn.silence.service.impl;
+package cn.silence.service.api.impl;
 
 import cn.silence.common.toolkit.BeanUtilsPlus;
 import cn.silence.dao.entity.UserInfo;
 import cn.silence.dao.mapper.UserInfoMapper;
-import cn.silence.dao.pojo.vo.UserInfoVo;
-import cn.silence.service.UserInfoService;
+import cn.silence.service.pojo.vo.UserInfoVo;
+import cn.silence.service.api.UserInfoService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.stereotype.Service;
 

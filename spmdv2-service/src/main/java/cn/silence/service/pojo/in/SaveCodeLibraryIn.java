@@ -1,6 +1,6 @@
-package cn.silence.dao.pojo.in;
+package cn.silence.service.pojo.in;
 
-import cn.silence.dao.pojo.vo.CodeSaveVo;
+import cn.silence.service.pojo.vo.CodeSaveVo;
 import lombok.Data;
 
 import java.io.Serializable;

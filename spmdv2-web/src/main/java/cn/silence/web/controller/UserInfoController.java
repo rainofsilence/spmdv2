@@ -2,8 +2,8 @@ package cn.silence.web.controller;
 
 import cn.silence.common.toolkit.BaseResponse;
 import cn.silence.common.toolkit.ResultUtils;
-import cn.silence.dao.pojo.vo.UserInfoVo;
-import cn.silence.service.UserInfoService;
+import cn.silence.service.pojo.vo.UserInfoVo;
+import cn.silence.service.api.UserInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
