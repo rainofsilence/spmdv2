@@ -27,6 +27,11 @@
             <groupId>cn.silence</groupId>
             <artifactId>spmdv2-common</artifactId>
         </dependency>
+        <!--springboot aop-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

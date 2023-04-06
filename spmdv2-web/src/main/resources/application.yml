@@ -12,6 +12,9 @@ spring:
     username: root
     password: admin
     driver-class-name: com.mysql.cj.jdbc.Driver
+  aop:
+    auto: true
+    proxy-target-class: true
 mybatis-plus:
   global-config:
     db-config:

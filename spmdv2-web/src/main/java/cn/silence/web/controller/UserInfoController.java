@@ -29,7 +29,6 @@ public class UserInfoController {
 
     @GetMapping("/list")
     public BaseResponse<List<UserInfoVo>> list() {
-        log.info("UserInfoController.list start");
         return ResultUtils.success(userInfoService.listAll());
     }
 }

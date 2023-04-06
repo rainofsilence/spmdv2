@@ -3,6 +3,7 @@ package cn.silence.service.api.impl;
 import cn.silence.common.toolkit.BeanUtilsPlus;
 import cn.silence.dao.entity.UserInfo;
 import cn.silence.dao.mapper.UserInfoMapper;
+import cn.silence.service.aop.MyAnnotation;
 import cn.silence.service.pojo.vo.UserInfoVo;
 import cn.silence.service.api.UserInfoService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -25,6 +26,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Resource
     private UserInfoMapper userInfoMapper;
 
+    @MyAnnotation("aop 测试")
     @Override
     public List<UserInfoVo> listAll() {
         QueryWrapper<UserInfo> userInfoQueryWrapper = new QueryWrapper<>();
