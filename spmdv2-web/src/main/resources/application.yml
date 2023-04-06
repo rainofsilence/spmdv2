@@ -3,6 +3,8 @@ server:
   servlet:
     context-path: /
 spring:
+  application:
+    name: spmdv2.web
   profiles:
     active: dev
   datasource:
